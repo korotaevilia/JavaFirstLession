@@ -2,12 +2,15 @@ package lession1;
 
 public class exercise3 {
     public static void main(String[] args) {
-        // через дабл, чтоб не потерять внутренние результаты вычислений
-        double a = 10;
-        double b = 5;
-        double c = 5;
-        double d = 10;
-        double operation = a * (b + (c / d));
-        System.out.println(operation);
+        System.out.println(result(1,2,3,4));
+
+
+
     }
-}
+        public static double result(double a,double b,double c, double d)
+        {
+            // через дабл, чтоб не потерять внутренние результаты вычислений
+
+                double operation = a * (b + (c / d));
+                return operation;
+         }}
