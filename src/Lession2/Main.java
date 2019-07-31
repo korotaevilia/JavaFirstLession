@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        FirstExample(); //результат для 1го задания
+        FirstExample(); //результаты
         System.out.println();
         SecondExample();
         System.out.println();
@@ -15,6 +15,17 @@ public class Main {
         FourthExample();
         System.out.println();
         FifthExample();
+        System.out.println();
+
+        int[] sixthMass = {7, 2, 3, 1}; //для передачи в параметр 6го задания
+        System.out.println(SixthExample(sixthMass));
+
+        int seventhNum = -1;
+        int[] seventhMass = {1, 2, 3, 4, 5, 6, 7};
+        SeventhExample(seventhNum, seventhMass);
+
+        EightExample();
+
 
     }
 
@@ -87,5 +98,62 @@ public class Main {
         }
         System.out.println("min = " + min + " max= " + max);
     }
+
+    //Шестое задание
+    public static boolean SixthExample(int[] mass) {
+        //   mass = {1, 2, 3, 6};
+        int leftSum = 0;
+        int rightSum = 0;
+        for (int i = 0; i < mass.length; i++) {         //левая сумма
+            leftSum = leftSum + mass[i];
+            rightSum = 0;
+            for (int j = i + 1; j < mass.length; j++) {          // считаем для сравнения сумму после i элемента
+                rightSum = rightSum + mass[j];
+            }
+            if (leftSum == rightSum) return true;
+        }
+        return false;                                   // если ничего не нашли
+    }
+
+    //Седьмое задание
+    public static void SeventhExample(int n, int[] mass) {
+        // -1 и 1,2,3,4,5,6,7
+        if (n > 0) {
+            for (int i = mass.length - 1; i >= 0; i--) {
+                if (i >= n) {                               //смещение элементов на n, и зануление "пустых мест".
+                    mass[i] = mass[i - n];
+                } else {
+                    mass[i] = 0;
+                }
+            }
+        } else if (n < 0) {
+            for (int i = 0; i < mass.length; i++) {
+                if (i < mass.length + n) {                 //смещение элементов на n, и зануление "пустых мест".
+                    mass[i] = mass[i - n];
+                } else {
+                    mass[i] = 0;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(mass));
+
+    }
+
+    //Дополнительное задание
+    public static void EightExample() {
+        int[] mass = {6, 5, 1, 3, 9};
+        for (int i = mass.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (mass[j] > mass[j + 1]) {
+                    int buf = mass[j];                       //сохраняется в переменную , чтоб не затерся
+                    mass[j] = mass[j + 1];
+                    mass[j + 1] = buf;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(mass));
+    }
 }
+
+
 
