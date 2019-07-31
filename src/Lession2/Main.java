@@ -13,6 +13,8 @@ public class Main {
         ThirdExample();
         System.out.println();
         FourthExample();
+        System.out.println();
+        FifthExample();
 
     }
 
@@ -58,7 +60,7 @@ public class Main {
         for (int i = 0; i < mass.length; i++) {
             System.out.println();
             for (int j = 0; j < mass[i].length; j++) {
-                if (i == j) {
+                if (i == j) {                                     // сразу и заполняется массив и диагональный элемент = 1
                     mass[i][j] = 1;
                 } else {
                     mass[i][j] = 0;
@@ -68,6 +70,22 @@ public class Main {
             }
 
         }
+    }
+
+    //Пятое задание
+    public static void FifthExample() {
+        int[] mass = {1, 2, 3, 4, 5, 6, -20, 8, 9, 150, 11, 12};
+        int max = mass[1];                                      //и максимальный и минимальный элементы принимаются за 1й эл. массива
+        int min = mass[1];
+        for (int i = 0; i < mass.length; i++) {
+            if (mass[i] > max) {
+                max = mass[i];
+            }
+            if (mass[i] < min) {
+                min = mass[i];
+            }
+        }
+        System.out.println("min = " + min + " max= " + max);
     }
 }
 
