@@ -6,6 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
         FirstExample(); //результат для 1го задания
+        System.out.println();
+        SecondExample();
+
     }
 
     //Первое задание
@@ -19,6 +22,18 @@ public class Main {
             }
             System.out.print(mass[i]);
         }
+    }
+
+    //Второе задание
+    public static void SecondExample() {
+        int[] mass = new int[8];
+        for (int i = 0, ii = 0; (ii < 8); i += 3, ii = ii + 1) {   // i отвечает за сам элемент , ii за порядковый номер в массиве
+            mass[ii] = i;
+            System.out.print(mass[ii] + " ");
+
+
+        }
+
     }
 
 
