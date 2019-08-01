@@ -8,7 +8,7 @@ public class homework {
         Scanner sc = new Scanner(System.in);
 
 
-        String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli", "carrot", "cherry", "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
+        String[] words = {"персик","яблоко","мандарин","манго","вишня","лимон","абрикос","арбуз","дыня","апельсин","банан","слива","груша","малина","клубника"};
         boolean answer = false;    //заготовка на цикл
         Random rand = new Random();
         int numOfword = rand.nextInt(words.length); //выбор слова для угадывания
@@ -17,9 +17,12 @@ public class homework {
         for (int i = 0; i < words[numOfword].length(); i++) {
             preAnswer = preAnswer.append('#');
         }
+
         while (answer == false) {
-            System.out.println("Угадай слово( англ, маленькие) 10 попыток, по одной букве");
+            System.out.println("Угадай слово( рус, маленькие) 5 попыток, по одной букве");
             String inputWord = sc.nextLine();
+            boolean flag = false;
+
 
             for (int i = 0; i < words[numOfword].length(); i++) {
                 if (i < words[numOfword].length()) {
@@ -28,6 +31,7 @@ public class homework {
                     if (a == b) {
                         preAnswer.deleteCharAt(i);
                         preAnswer.insert(i, words[numOfword].charAt(i));
+                        flag = true;
                         if (preAnswer.toString().equals(words[numOfword])) {
                             answer = true;
                             System.out.println("Угадал");
@@ -39,15 +43,19 @@ public class homework {
 
             }
             System.out.println("попытка " + (numberOftry + 1));
-            System.out.println("Ответ " + preAnswer);
-            numberOftry++;
-            if (numberOftry > 9) {
+            System.out.println("Слово " + preAnswer);
+
+            if (flag == false) {
+                numberOftry++;
+            }
+            if (numberOftry > 4) {
                 System.out.println("Не Угадал");
                 break;
             }
 
+
         }
-        System.out.println(preAnswer);
+        System.out.println("Ответ " + words[numOfword]);
 
     }
 }
