@@ -20,9 +20,13 @@ public class Main {
         int[] sixthMass = {7, 2, 3, 1}; //для передачи в параметр 6го задания
         System.out.println(SixthExample(sixthMass));
 
-        int seventhNum = -1;
+        int seventhNum = 2;                                //пример с положительным числом
         int[] seventhMass = {1, 2, 3, 4, 5, 6, 7};
         SeventhExample(seventhNum, seventhMass);
+
+        int seventhNum2 = -1;
+        int[] seventhMass2 = {1, 2, 3, 4, 5, 6, 7};         //пример с отрицательным числом
+        SeventhExample(seventhNum2, seventhMass2);
 
         EightExample();
 
@@ -117,27 +121,27 @@ public class Main {
 
     //Седьмое задание
     public static void SeventhExample(int n, int[] mass) {
-        // -1 и 1,2,3,4,5,6,7
+        // 1 и 1,2,3,4,5,6,7
         if (n > 0) {
-            for (int i = mass.length - 1; i >= 0; i--) {
-                if (i >= n) {                               //смещение элементов на n, и зануление "пустых мест".
-                    mass[i] = mass[i - n];
-                } else {
-                    mass[i] = 0;
+            for (int i = 0; i < n; i++) {                          //повтор сдвига на n элементов
+                int cache = mass[mass.length - 1];                   //сохранение 1го элемента
+                for (int j = (mass.length - 1); j > 0; j--) {
+                    mass[j] = mass[j - 1];                              //сдвиг всех остальных на 1
                 }
+                mass[0] = cache;
             }
         } else if (n < 0) {
-            for (int i = 0; i < mass.length; i++) {
-                if (i < mass.length + n) {                 //смещение элементов на n, и зануление "пустых мест".
-                    mass[i] = mass[i - n];
-                } else {
-                    mass[i] = 0;
+            for (int i = 0; i > n; i--) {
+                int cache = mass[0];                                     //сохранение 1го элемента
+                for (int j = 0; j < mass.length - 1; j++) {
+                    mass[j] = mass[j + 1];                              //сдвиг всех остальных на 1
                 }
+                mass[mass.length - 1] = cache;
             }
         }
         System.out.println(Arrays.toString(mass));
-
     }
+
 
     //Дополнительное задание
     public static void EightExample() {
