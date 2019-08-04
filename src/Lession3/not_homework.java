@@ -20,9 +20,9 @@ public class not_homework {   // попробовал написать "висе
 
         while (answer == false) {
             System.out.println("Угадай слово( рус, маленькие) 5 попыток, по одной букве");
-            String inputWord = sc.nextLine();
             boolean flag = false;
             System.out.println("попытка " + (numberOftry + 1));
+            String inputWord = sc.nextLine();
 
 
             for (int i = 0; i < words[numOfword].length(); i++) {
