@@ -112,8 +112,8 @@ public class tic_tac_toe {
         countOfMatches = 0;
         for (int k = 0; k < SIZE_X * 2; k++) {                                       //ищет по диагонали сверху вниз
             for (int j = SIZE_X; j >= 0; j--) {
-                int i = k - (SIZE_X-j);
-                if (i < SIZE_X && j < SIZE_X && i>=0 && j>=0) {
+                int i = k - (SIZE_X - j);
+                if (i < SIZE_X && j < SIZE_X && i >= 0 && j >= 0) {
                     if (field[i][j] == sym) {
                         countOfMatches++;
                         if (countOfMatches == COUNT_OF_WIN) {
@@ -125,12 +125,49 @@ public class tic_tac_toe {
                 }
             }
         }
-
-
         return false;
     }
 
-    public static void aiStep() {
+
+    public static void aiStep() {           //смысл будет такой же как и у проверки на победу
+        int countOfBlock = 0;
+        for (int i = 0; i < SIZE_Y; i++) {                                                 //ищет по Х и пытается воткнуть 0 после двух Х либо до них
+            for (int j = 0; j < SIZE_X; j++) {
+                if (field[i][j] == PLAYER_DOT) {
+                    countOfBlock++;
+                    if (countOfBlock == 2) {
+                        if (j < SIZE_X-1 && field[i][j + 1] == EMPTY_DOT) {
+                            field[i][j + 1] = AI_DOT;
+                            return;
+                        } else if ( j>=2 && field[i][j - 2] == EMPTY_DOT) {
+                            field[i][j - 2] = AI_DOT;
+                            return;
+                        }
+                    }
+                } else {
+                    countOfBlock = 0;
+                }
+            }
+        }
+        countOfBlock = 0;
+        for (int j = 0; j < SIZE_X; j++) {                                                 //ищет по Y
+            for (int i = 0; i < SIZE_X; i++) {
+                if (field[i][j] == PLAYER_DOT) {
+                    countOfBlock++;
+                    if (countOfBlock == 2) {
+                        if (i<SIZE_Y-1 && field[i + 1][j] == EMPTY_DOT) {
+                            field[i + 1][j] = AI_DOT;
+                            return;
+                        } else if (i >=2 && field[i - 2][j] == EMPTY_DOT) {
+                            field[i - 2][j] = AI_DOT;
+                            return;
+                        }
+                    }
+                } else {
+                    countOfBlock = 0;
+                }
+            }
+        }
         int x, y;
         do {
             x = rand.nextInt(SIZE_X);
