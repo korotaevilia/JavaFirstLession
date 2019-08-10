@@ -8,7 +8,8 @@ public class tic_tac_toe {
 
     static final int SIZE_X = 5;
     static final int SIZE_Y = 5;
-    static final int COUNT_OF_WIN = 4;
+    static final int COUNT_OF_WIN = 4;         //число повторений Х или О для победы
+    static final int DIFFICULT = 2;           //число повторений Х после которого комп начнет блочить
 
     static char[][] field = new char[SIZE_Y][SIZE_X];
 
@@ -135,12 +136,12 @@ public class tic_tac_toe {
             for (int j = 0; j < SIZE_X; j++) {
                 if (field[i][j] == PLAYER_DOT) {
                     countOfBlock++;
-                    if (countOfBlock == 2) {
-                        if (j < SIZE_X-1 && field[i][j + 1] == EMPTY_DOT) {
+                    if (countOfBlock == DIFFICULT) {
+                        if (isCellValid(i, j + 1)) {
                             field[i][j + 1] = AI_DOT;
                             return;
-                        } else if ( j>=2 && field[i][j - 2] == EMPTY_DOT) {
-                            field[i][j - 2] = AI_DOT;
+                        } else if (isCellValid(i, j - DIFFICULT)) {
+                            field[i][j - DIFFICULT] = AI_DOT;
                             return;
                         }
                     }
@@ -154,17 +155,63 @@ public class tic_tac_toe {
             for (int i = 0; i < SIZE_X; i++) {
                 if (field[i][j] == PLAYER_DOT) {
                     countOfBlock++;
-                    if (countOfBlock == 2) {
-                        if (i<SIZE_Y-1 && field[i + 1][j] == EMPTY_DOT) {
+                    if (countOfBlock == DIFFICULT) {
+                        if (isCellValid(i + 1, j)) {
                             field[i + 1][j] = AI_DOT;
                             return;
-                        } else if (i >=2 && field[i - 2][j] == EMPTY_DOT) {
-                            field[i - 2][j] = AI_DOT;
+                        } else if (isCellValid(i - DIFFICULT, j)) {
+                            field[i - DIFFICULT][j] = AI_DOT;
                             return;
                         }
                     }
                 } else {
                     countOfBlock = 0;
+                }
+            }
+        }
+        countOfBlock = 0;
+        for (int k = 0; k < SIZE_X * 2; k++) {                                       //ищет по диагонали /
+            for (int j = 0; j <= k; j++) {
+                int i = k - j;
+                if (i < SIZE_X && j < SIZE_X) {
+                    if (field[i][j] == PLAYER_DOT) {
+                        countOfBlock++;
+                        if (countOfBlock == DIFFICULT) {
+                            if (isCellValid(i - 1, j + 1)) {
+                                field[i - 1][j + 1] = AI_DOT;
+                                return;
+                            } else if (isCellValid(i + DIFFICULT, j - DIFFICULT)) {
+                                field[i + DIFFICULT][j - DIFFICULT] = AI_DOT;
+                                return;
+                            }
+
+                        }
+                    } else {
+                        countOfBlock = 0;
+                    }
+                }
+            }
+        }
+        countOfBlock = 0;
+        for (int k = 0; k < SIZE_X * 2; k++) {                                       //ищет по диагонали \
+            for (int j = SIZE_X; j >= 0; j--) {
+                int i = k - (SIZE_X - j);
+                if (i < SIZE_X && j < SIZE_X && i >= 0 && j >= 0) {
+                    if (field[i][j] == PLAYER_DOT) {
+                        countOfBlock++;
+                        if (countOfBlock == DIFFICULT) {
+                            if (isCellValid(i - 1, j - 1)) {
+                                field[i - 1][j - 1] = AI_DOT;
+                                return;
+                            } else if (isCellValid(i + DIFFICULT, j + DIFFICULT)) {
+                                field[i + DIFFICULT][j + DIFFICULT] = AI_DOT;
+                                return;
+                            }
+
+                        }
+                    } else {
+                        countOfBlock = 0;
+                    }
                 }
             }
         }
