@@ -6,8 +6,9 @@ import java.util.Scanner;
 public class tic_tac_toe {
 
 
-    static final int SIZE_X = 3;
-    static final int SIZE_Y = 3;
+    static final int SIZE_X = 5;
+    static final int SIZE_Y = 5;
+    static final int COUNT_OF_WIN = 4;
 
     static char[][] field = new char[SIZE_Y][SIZE_X];
 
@@ -65,33 +66,66 @@ public class tic_tac_toe {
     }
 
 
-    public static boolean checkWin(char sym) {
-        if (field[0][0] == sym && field[0][1] == sym && field[0][2] == sym) {
-            return true;
+    public static boolean checkWin(char sym) {                                              // универсальная проверка,будет работать в любом поле с любым условием победы
+        int countOfMatches = 0;
+        for (int i = 0; i < SIZE_Y; i++) {                                                 //ищет по Х
+            for (int j = 0; j < SIZE_X; j++) {
+                if (field[i][j] == sym) {
+                    countOfMatches++;
+                    if (countOfMatches == COUNT_OF_WIN) {
+                        return true;
+                    }
+                } else {
+                    countOfMatches = 0;
+                }
+            }
         }
-        if (field[1][0] == sym && field[1][1] == sym && field[1][2] == sym) {
-            return true;
+        countOfMatches = 0;
+        for (int j = 0; j < SIZE_X; j++) {                                                 //ищет по y
+            for (int i = 0; i < SIZE_Y; i++) {
+                if (field[i][j] == sym) {
+                    countOfMatches++;
+                    if (countOfMatches == COUNT_OF_WIN) {
+                        return true;
+                    }
+                } else {
+                    countOfMatches = 0;
+                }
+            }
         }
-        if (field[2][0] == sym && field[2][1] == sym && field[2][2] == sym) {
-            return true;
+        countOfMatches = 0;
+        for (int k = 0; k < SIZE_X * 2; k++) {                                       //ищет по диагонали снизу вверх
+            for (int j = 0; j <= k; j++) {
+                int i = k - j;
+                if (i < SIZE_X && j < SIZE_X) {
+                    if (field[i][j] == sym) {
+                        countOfMatches++;
+                        if (countOfMatches == COUNT_OF_WIN) {
+                            return true;
+                        }
+                    } else {
+                        countOfMatches = 0;
+                    }
+                }
+            }
+        }
+        countOfMatches = 0;
+        for (int k = 0; k < SIZE_X * 2; k++) {                                       //ищет по диагонали сверху вниз
+            for (int j = SIZE_X; j >= 0; j--) {
+                int i = k - (SIZE_X-j);
+                if (i < SIZE_X && j < SIZE_X && i>=0 && j>=0) {
+                    if (field[i][j] == sym) {
+                        countOfMatches++;
+                        if (countOfMatches == COUNT_OF_WIN) {
+                            return true;
+                        }
+                    } else {
+                        countOfMatches = 0;
+                    }
+                }
+            }
         }
 
-        if (field[0][0] == sym && field[1][0] == sym && field[2][0] == sym) {
-            return true;
-        }
-        if (field[0][1] == sym && field[1][1] == sym && field[2][1] == sym) {
-            return true;
-        }
-        if (field[0][2] == sym && field[1][2] == sym && field[2][2] == sym) {
-            return true;
-        }
-
-        if (field[0][0] == sym && field[1][1] == sym && field[2][2] == sym) {
-            return true;
-        }
-        if (field[2][0] == sym && field[1][1] == sym && field[0][2] == sym) {
-            return true;
-        }
 
         return false;
     }
@@ -138,6 +172,7 @@ public class tic_tac_toe {
                 System.out.println("DRAW");
             }
         }
+        scanner.close();
     }
 
 }
