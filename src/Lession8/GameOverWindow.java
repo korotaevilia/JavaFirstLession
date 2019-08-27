@@ -8,7 +8,8 @@ import java.awt.event.ActionListener;
 public class GameOverWindow extends JDialog {
 
     private JLabel jLabel = new JLabel();
-//окно с сообщением результата игры
+
+    //окно с сообщением результата игры
     public GameOverWindow() {
 
         add(jLabel, BorderLayout.CENTER);
@@ -25,14 +26,19 @@ public class GameOverWindow extends JDialog {
         panel.add(ok);
         add(panel, BorderLayout.SOUTH);
         setSize(260, 160);
-        setLocationRelativeTo ( null );
+        setLocationRelativeTo(null);
 
     }
-//тянет мессадж
+
+    //тянет мессадж
     public void setMessage(String message, Map map) {
         map.gameOver = true;
         this.setVisible(true);
         jLabel.setText(message);
     }
 
+    public void setMessageWrong(String message) {
+        this.setVisible(true);
+        jLabel.setText(message);
+    }
 }

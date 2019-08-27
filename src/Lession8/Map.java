@@ -40,7 +40,7 @@ public class Map extends JPanel {
         gameOverWindow = new GameOverWindow();
     }
 
-    // ход игрока
+    // ход игрока, попытался прикрутить возможность логики для проверки валидности хода( чтоб ход не шел пока не  поставишь Х в пустую)
     void playerStep(int y, int x, char symbol) {
         setSym(y, x, symbol);
     }
@@ -77,13 +77,15 @@ public class Map extends JPanel {
         setSym(y, x, AI_DOT);
     }
 
-    //запуск хода при клике мышкой
+    //запуск хода при клике мышкой, прикрутил мессадж при ходе в "Занятую" ячейку
     void update(MouseEvent e) {
         if (!gameOver && !isWait) {
             int cellX = e.getX() / cellWidth;
             int cellY = e.getY() / cellHeight;
-            if (mode == 0) modePlayAI(cellY, cellX);
-            else modeTwoPlayer(cellY, cellX);
+            if (field[cellY][cellX] == EMPTY_DOT) {
+                if (mode == 0) modePlayAI(cellY, cellX);
+                else modeTwoPlayer(cellY, cellX);
+            } else {gameOverWindow.setMessageWrong("Нельзя ходить в занятую ячейку");}
         }
     }
 
