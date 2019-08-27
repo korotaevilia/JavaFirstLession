@@ -16,11 +16,11 @@ public class StartNewGameWindow extends JFrame {
     private static final int MIN_FIELD_SIZE = 3;
     private static final int MAX_WIN_LEN = 10;
     private static final int MAX_FIELD_SIZE = 10;
-    private static final String STR_WIN_LEN = "Winning Len: ";
-    private static final String STR_FILED_SIZE = "Field Size: ";
+    private static final String STR_WIN_LEN = "Победная серия: ";
+    private static final String STR_FILED_SIZE = "Размер поля: ";
 
-    private JRadioButton jrbHumVsAi = new JRadioButton("Human vs Ai", true);
-    private JRadioButton jrbHumVsHum = new JRadioButton("Human vs Human");
+    private JRadioButton jrbHumVsAi = new JRadioButton("Игрок против ИИ", true);
+    private JRadioButton jrbHumVsHum = new JRadioButton("Игрок против Игрока");
     private ButtonGroup gameMode = new ButtonGroup();
 
     private JSlider slFieldSize;
@@ -29,21 +29,21 @@ public class StartNewGameWindow extends JFrame {
 
     public StartNewGameWindow(GameWindow gameWindow) {
         this.gameWindow = gameWindow;
-        setTitle("new game param!");
+        setTitle("Новая игра");
         setSize(WIN_WIDTH, WIN_HEIGHT);
-        setLocationRelativeTo ( null );
+        setLocationRelativeTo(null);
 
         Rectangle gameWindowBounds = gameWindow.getBounds();
-        int posX = (int) (gameWindowBounds.getCenterX() - WIN_WIDTH/2);
-        int posY = (int) (gameWindowBounds.getCenterY() - WIN_HEIGHT/2);
+        int posX = (int) (gameWindowBounds.getCenterX() - WIN_WIDTH / 2);
+        int posY = (int) (gameWindowBounds.getCenterY() - WIN_HEIGHT / 2);
 
         setLocation(posX, posY);
-        setLayout(new GridLayout(10,1));
+        setLayout(new GridLayout(10, 1));
 
         addGameControlsMode();
         addGameControlsFieldWinLen();
 
-        JButton btnStartGame = new JButton("Start a game");
+        JButton btnStartGame = new JButton("Начать игру");
         btnStartGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,9 +54,10 @@ public class StartNewGameWindow extends JFrame {
 
     }
 
+    //обработка нажатия кнопки начать игру с применением параметров
     void btnStartGame() {
         int gameMode;
-        if(jrbHumVsAi.isSelected()) {
+        if (jrbHumVsAi.isSelected()) {
             gameMode = Map.MODE_H_V_A;
         } else {
             gameMode = Map.MODE_H_V_H;
@@ -69,7 +70,7 @@ public class StartNewGameWindow extends JFrame {
     }
 
     private void addGameControlsMode() {
-        add(new JLabel("Choose gaming mode"));
+        add(new JLabel("Выбери тип игры"));
         gameMode.add(jrbHumVsAi);
         gameMode.add(jrbHumVsHum);
         add(jrbHumVsAi);
@@ -77,7 +78,7 @@ public class StartNewGameWindow extends JFrame {
     }
 
     void addGameControlsFieldWinLen() {
-        add(new JLabel("Choose field size"));
+        add(new JLabel("Выбери размер поля"));
         final JLabel lblFieldSize = new JLabel(STR_FILED_SIZE + MIN_FIELD_SIZE);
         add(lblFieldSize);
 
@@ -92,7 +93,7 @@ public class StartNewGameWindow extends JFrame {
         });
         add(slFieldSize);
 
-        add(new JLabel("Choose win len: "));
+        add(new JLabel("Выбери размер победной серии"));
         final JLabel lblWinLen = new JLabel(STR_WIN_LEN + MIN_WIN_LEN);
         add(lblWinLen);
 
@@ -106,7 +107,6 @@ public class StartNewGameWindow extends JFrame {
         add(slWinLeght);
 
     }
-
 
 
 }

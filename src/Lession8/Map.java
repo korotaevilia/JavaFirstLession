@@ -93,11 +93,11 @@ public class Map extends JPanel {
         playerStep(y, x, symbol);
         repaint();
         if (checkWin(symbol)) {
-            gameOverWindow.setMessage(stepPlayer2 ? "Second player WIN!!" : "First player WIN!!", this);
+            gameOverWindow.setMessage(stepPlayer2 ? "Победа второго игрока" : "Первый игрок победил", this);
             return;
         }
         if (isFuelFull()) {
-            gameOverWindow.setMessage("DRAW!", this);
+            gameOverWindow.setMessage("Ничья", this);
             return;
         }
         //решение на 10/10 ))
@@ -109,11 +109,11 @@ public class Map extends JPanel {
         playerStep(y, x, PLAYER_DOT);
         repaint();
         if (checkWin(PLAYER_DOT)) {
-            gameOverWindow.setMessage("PLAYER WIN!", this);
+            gameOverWindow.setMessage("Игрок победил", this);
             return;
         }
         if (isFuelFull()) {
-            gameOverWindow.setMessage("DRAW!", this);
+            gameOverWindow.setMessage("Ничья", this);
             return;
         }
         isWait = true;
@@ -121,11 +121,11 @@ public class Map extends JPanel {
         isWait = false;
         repaint();
         if (checkWin(AI_DOT)) {
-            gameOverWindow.setMessage("SkyNet WIN!", this);
+            gameOverWindow.setMessage("ИИ победил", this);
             return;
         }
         if (isFuelFull()) {
-            gameOverWindow.setMessage("DRAW!", this);
+            gameOverWindow.setMessage("Ничья", this);
             return;
         }
     }
